@@ -68,6 +68,10 @@ body {
   letter-spacing: -.05rem;
 }
 
+.discord-link {
+  color: #7289da;
+}
+
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
