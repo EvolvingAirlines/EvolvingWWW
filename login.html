@@ -128,7 +128,7 @@
                     username: nickname.value,
                     password: password.value
                 }
-                const response = await fetch("http://marcink500.ddns.net:3000/login", {
+                const response = await fetch("http://marcink50.ddns.net:3000/login", {
                     method: 'POST',
                     mode: 'cors',
                     headers: { "Content-Type": "application/json" },
@@ -139,7 +139,7 @@
                     var passwordModal = new bootstrap.Modal(document.getElementById("passwordModal"));
                     passwordModal.show();
                 } else {
-                    window.location.href = "panel.html";
+                    window.location.href = `panel.html?username=${nickname.value}`;
                 }
             })()
 

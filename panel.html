@@ -7,6 +7,26 @@
     <title>Evolving Airlines Pilot Dashboard · Main</title>
 </head>
 <body>
-    <h1>Tutaj jeszcze jest ściernisko, ale będzie San Francisco</h1>
+    <h1 id="header">Tutaj jeszcze jest ściernisko, ale będzie San Francisco</h1>
+    <h3 id="secondsFlew">You flew 0 seconds</h3>
+
+    <script>
+        const header = document.getElementById("header")
+        const secondsFlew = document.getElementById("secondsFlew")
+        const username = get('username')
+
+        function get(name){
+            if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+        }
+
+        fetch(`http://marcink50.ddns.net:3000/getUserInfo?username=${username}`)
+        .then(response => response.json())
+        .then(data => {
+            secondsFlew.innerText = `You flew ${data.seconds} seconds`
+        })
+
+        header.innerText = `Your nick is ${username}`
+    </script>
 </body>
 </html>
