@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="We want to be the best FlightGear virual airline">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>Evolving Airlines · Current Flights</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    table {
+      margin-top: 20px;
+    }
+
+    footer {
+      margin-top: 75vh;
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="carousel.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Evolving Airlines</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                About us
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="fleet.html">Fleet</a></li>
+                <li><a class="dropdown-item" href="flights.html">Current flights</a></li>
+                <li><a class="dropdown-item" href="pilots.html">Pilot Roster</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html" tabindex="-1">Contact</a>
+            </li>
+          </ul>
+          <a href="login.html"><button class="btn btn-outline-light">Sign in</button></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="container marketing">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Flight Number</th>
+            <th scope="col">Pilot</th>
+            <th scope="col">Aircraft</th>
+            <th scope="col">Altitude</th>
+            <th scope="col">Heading</th>
+            <th scope="col">Speed</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+
+        </tbody>
+      </table>
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class="container">
+      <p class="float-end"><a href="#">Back to top</a></p>
+      <p>&copy; 2021 Evolving Airlines &middot; Made with ❤️ by MarcinK50</p>
+    </footer>
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <script>
+    const tableBody = document.getElementById("tableBody")
+
+    fetch("http://marcink50.ddns.net:3000/getCurrentFlights")
+      .then(response => response.json())
+      .then(data => {
+        if (data.code == 404) {
+          console.log("pusto D:")
+        } else {
+          data.flights.forEach(flight => {
+            const row = document.createElement("tr")
+            row.innerHTML = `<th>${flight.flightNumber}</th><td>${flight.username}</td><td>${flight.aircraftType}</td><td id="${flight.username}Alt">${flight.altitude}</td><td id="${flight.username}Hdg">${flight.heading}</td><td id="${flight.username}Spd">${flight.speed}</td>`
+            tableBody.append(row)
+          })
+        }
+      })
+
+    setInterval(() => {
+      fetch("http://marcink50.ddns.net:3000/getCurrentFlights")
+        .then(response => response.json())
+        .then(data => {
+          if (data.code == 404) {
+            tableBody.innerHTML = ""
+          } else {
+            data.flights.forEach(flight => {
+              if (tableBody.innerHTML) {
+                const alt = document.getElementById(`${flight.username}Alt`)
+                const hdg = document.getElementById(`${flight.username}Hdg`)
+                const spd = document.getElementById(`${flight.username}Spd`)
+
+                alt.innerHTML = flight.altitude
+                hdg.innerHTML = flight.heading
+                spd.innerHTML = flight.speed
+              } else {
+                const row = document.createElement("tr")
+                row.innerHTML = `<th>${flight.flightNumber}</th><td>${flight.username}</td><td>${flight.aircraftType}</td><td id="${flight.username}Alt">${flight.altitude}</td><td id="${flight.username}Hdg">${flight.heading}</td><td id="${flight.username}Spd">${flight.speed}</td>`
+                tableBody.append(row)
+              }
+              })
+          }
+        })
+    }, 5000)
+  </script>
+
+</body>
+
+</html>
