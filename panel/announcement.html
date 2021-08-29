@@ -4,19 +4,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Evolving Airlines | Settings</title>
+  <title>Evolving Airlines | Announcement</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
+
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
@@ -32,7 +47,6 @@
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
             <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -52,7 +66,7 @@
               <span class="float-right text-muted text-sm">2 days</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+            <a href="#" class="dropdown-item dropdown-footer">Telegram: @MarcinK50</a>
           </div>
         </li>
         <li class="nav-item">
@@ -91,7 +105,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="index.html" class="nav-link">
+              <a href="index.html" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </a>
@@ -105,13 +119,14 @@
               </a>
             </li>
             <!-- <li class="nav-item">
-              <a href="fpln.html" class="nav-link">
+              <a href="fpln.html" class="nav-link disabled" aria-disabled="true">
+                <span class="badge badge-secondary">Soon</span>
                 <i class="fa fa-fw fa-plane nav-icon"></i>
                 <p>File a flightplan</p>
               </a>
             </li> -->
             <li class="nav-item">
-              <a href="settings.html" class="nav-link active">
+              <a href="settings.html" class="nav-link">
                 <i class="fa fa-cog nav-icon"></i>
                 <p>User settings</p>
               </a>
@@ -126,133 +141,93 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <section class="content-header">
+      <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>Settings</h1>
-            </div>
+              <h1 class="m-0">Announcement</h1>
+            </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Settings</li>
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
               </ol>
-            </div>
-          </div>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-      </section>
+      </div>
+      <!-- /.content-header -->
 
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
           <div class="row">
-            <!-- right column -->
-            <div class="col-12">
-              <div class="card card-primary card-login-settings">
+            <div class="col-lg-12 col-12">
+              <!-- small box -->
+              <div class="card card-outline card-primary">
                 <div class="card-header">
-                  <h3 class="card-title settings-title">Log in to change settings</h3>
+                  <h3 id="title-announcement" class="card-title greeting font-weight-bold"></h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
-                  <div class="col-4 ml-auto mr-auto">
-                    <div class="form-group">
-                      <label>Username</label>
-                      <input type="text" class="form-control" id="username-settings" value="MarcinK50" >
-                    </div>
-                  </div>
-                  <div class="col-sm-4 ml-auto mr-auto">
-                    <div class="form-group">
-                      <label>Password</label>
-                      <input type="password" id="password-settings" class="form-control">
-                    </div>
-                  </div>
-                  <button class="btn btn-primary btn-login-settings" style="float: right; margin-right: 27.8vw;">Log in</button>
+                    <p id="content-announcement" class="p-1"></p>
+                    <p id="published-announcement" class="p-1 mt-1 mb-0"></p>
+                    <p id="author-announcement" class="font-weight-light mb-0 p-1"></p>
                 </div>
-                <!-- /.card-body -->
               </div>
-              <!-- /.card -->
-              <!-- general form elements disabled -->
-              <div class="card card-primary d-none card-settings">
-                <div class="card-header">
-                  <h3 class="card-title">User Settings</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                  <div class="col-8">
-                    <div class="form-group">
-                      <label>Username</label>
-                      <input type="text" class="form-control" id="user-name" value="MarcinK50" disabled>
-                    </div>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="form-group">
-                      <label>E-Mail</label>
-                      <input type="text" class="form-control" id="user-email" value="john.doe@example.com" disabled>
-                    </div>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="form-group">
-                      <label>Pilot ranking</label>
-                      <input type="text" class="form-control" id="user-rank" value="Newbie" disabled>
-                    </div>
-                  </div>
-                  <div class="col-sm-8">
-                    <div class="form-group">
-                      <label>Pilot hours</label>
-                      <input type="text" class="form-control" id="user-time" value="00:41" disabled>
-                    </div>
-                  </div>
-                  <div class="form-check ml-2 mb-2">
-                    <input class="form-check-input" type="checkbox">
-                    <label class="form-check-label">Send me emails about Evolving Airlines</label>
-                  </div>
-                  <button class="btn btn-primary ml-2">Change password</button>
-                  <button class="btn btn-success" style="float: right; margin-right: 27.8vw;">Save</button>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
             </div>
-            <!--/.col (right) -->
           </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
       </section>
-      <!-- /.content -->
+      <!-- right col -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <div class="float-right d-none d-sm-block">
-        <b>Version</b> 1.1.0
-      </div>
-      <strong>Copyright &copy; 2021 <a href="http://evolving-airlines.cf">Evolving Airlines</a>.</strong> All rights reserved.
-    </footer>
+    <!-- /.row (main row) -->
+  </div><!-- /.container-fluid -->
+  <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2021 <a href="http://evolving-airlines.cf">Evolving Airlines</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.1.0
+    </div>
+  </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
   <!-- Bootstrap 4 -->
   <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- bs-custom-file-input -->
-  <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <!-- JQVMap -->
+  <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="plugins/moment/moment.min.js"></script>
+  <script src="plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="dist/js/demo.js"></script>
-  <!-- Page specific script -->
-  <script src="dist/js/pages/settings.js" defer></script>
-  <script>
-    $(function () {
-      bsCustomFileInput.init();
-    });
-  </script>
+  <script src="dist/js/adminlte.js"></script>
+  <script src="dist/js/pages/announcement.js"></script>
 </body>
 
 </html>

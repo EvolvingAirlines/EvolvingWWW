@@ -71,13 +71,15 @@ $(function () {
       else var dayNumber = dateFrom.getDate()
       var minutesFrom = String(dateFrom.getMinutes()).padStart(2, '0');
       var minutesTo = String(dateTo.getMinutes()).padStart(2, '0');
+      var hoursFrom = String(dateFrom.getUTCHours()).padStart(2, '0');
+      var hoursTo = String(dateTo.getUTCHours()).padStart(2, '0');
       eventDiv.innerHTML = `
       <h5 class="font-weight-bold">${flightEvent.title}
-        <a href="#" class="btn btn-md btn-secondary float-right">More Info
+        <a href="event.html?id=${flightEvent.id}" class="btn btn-md btn-secondary float-right">More Info
           <span class="fas fa-external-link-alt"></span>
         </a>
       </h5>
-      <p>${dayName}, ${dayNumber} ${dateFrom.toLocaleString('en-US', { month: 'long' })} ${dateFrom.getFullYear()}, ${dateFrom.getUTCHours()}:${minutesFrom}z - ${dateTo.getUTCHours()}:${minutesTo}z</p>`
+      <p>${dayName}, ${dayNumber} ${dateFrom.toLocaleString('en-US', { month: 'long' })} ${dateFrom.getFullYear()}, ${hoursFrom}:${minutesFrom}z - ${hoursTo}:${minutesTo}z</p>`
       eventsBody.append(eventDiv)
     })
   })
@@ -92,7 +94,7 @@ $(function () {
       var day = String(date.getDate()).padStart(2, '0');
       announcementDiv.innerHTML = `
       <td>${date.getFullYear()}-${month}-${day}</td>
-      <td><a href="#" class="font-weight-bold">${announcement.title}</a></td>
+      <td><a href="announcement.html?id=${announcement.id}" class="font-weight-bold">${announcement.title}</a></td>
       <td>${announcement.author}</td>`
       announcementsBody.append(announcementDiv)
     })
@@ -106,7 +108,7 @@ $(function () {
     if (hours < 10) { hours = "0" + hours; }
     if (minutes < 10) { minutes = "0" + minutes; }
     if (seconds < 10) { seconds = "0" + seconds; }
-    return `You flew ${hours}:${minutes} minutes.`; // Return is HH : MM : SS
+    return `You flew ${hours}:${minutes} hours.`; // Return is HH : MM : SS
   }
 
   fetch(`http://marcink50.ddns.net:3000/getUserInfo?username=${username}`)
